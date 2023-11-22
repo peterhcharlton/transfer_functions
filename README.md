@@ -92,6 +92,13 @@ _Post-processing the output signal_
 
 In the case of a single pulse being provided as the input signal, two additional post-processing steps are performed. Firstly, the central pulse is extracted from the train of repeated pulses, to avoid any edge effects. Secondly, this pulse is scaled to occupy a range of 0 to 1, since the actual units of the pulse are unknown.
 
+## `per_cen_TF`
+
+This code is designed to transforms peripheral ABP signals into central signals (and vice-versa) using an empirical transfer function. It is largely similar to `PPG_ABP_TF`, and includes the functionality to run an example using:
+```
+	transformed_sig = per_cen_TF;
+```
+
 ## Further Work
 
 The transfer function tends to result in a spurious peak during late diastole, as can be seen on the estimated digital and radial ABP pulses in the figure above (between 0.7 and 0.8 s). This is thought to be because the transfer functions used are only defined for frequency content of $\leq{} \approx$ 9 Hz. This spurious peak should be ignored during analyses, and further work may be required to suppress it.
