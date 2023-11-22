@@ -74,7 +74,9 @@ where `options` is a structure containing a field named `do_plot`, which is a tr
 
 `PPG_ABP_TF` consists of three stages: (i) pre-processing the input signal; (ii) estimating additional signals using a transfer function; and (iii) post-processing the output signal. The methods used at each stage are now described in turn.
 
-_Pre-processing the input signal:_ The pre-processing steps applied vary according to whether the input signal contains multiple pulses, or a single pulse. If the signal contains multiple pulses then the signal is filtered to remove irrelevant low (< 0.067 Hz) and high frequency (> 35 Hz) content. If the signal consists of a single pulse, then: (i) low frequency content is removed using linear detrending; (ii) the pulse is aligned to ensure that it commences at the start of the systolic upslope; (iii) the pulse is repeated several times to create a signal consisting of several pulses.
+_Pre-processing the input signal:_
+
+The pre-processing steps applied vary according to whether the input signal contains multiple pulses, or a single pulse. If the signal contains multiple pulses then the signal is filtered to remove irrelevant low (< 0.067 Hz) and high frequency (> 35 Hz) content. If the signal consists of a single pulse, then: (i) low frequency content is removed using linear detrending; (ii) the pulse is aligned to ensure that it commences at the start of the systolic upslope; (iii) the pulse is repeated several times to create a signal consisting of several pulses.
 
 _Estimating additional signals using a transfer function:_
 
