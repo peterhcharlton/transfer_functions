@@ -13,6 +13,44 @@ This repository contains two Matlab scripts:
 1. `PPG_ABP_TF`, for estimating digital and radial ABP waveforms from the PPG (and vice-versa). It is based on the transfer function reported in [[5]](#5).
 2. `per_cen_TF`, for estimating central ABP waveforms from peripheral ABP waveforms.
 
+## Estimating ABP from the PPG
+
+It has been suggested that a transfer function can be used to describe the relationship between PPG and ABP waveforms, which does not differ between normotensive and hypertensive patients, nor during administration of nitroglycerin, a vasodilator which affects the shape of the pulse waveform [[5]](#5). The transfer functions calculated using the ratio of the fast Fourier transforms of waveforms: FFT(ABP) / FFT(PPG), and were described using a Bode plot as shown in Figure 2 of [[5]](#5).
+
+To demonstrate how to use the transfer function, it is helpful to firstly show how to recover the PPG signal from its frequency domain representation. The PPG signal is denoted $x(t)$. The FFT of the PPG,
+
+```math
+	X(f) = \mathcal{F}\left(x(t)\right) 
+```
+
+is calculated, where $X(f)$ is the frequency domain representation of the PPG (a vector of complex numbers). The original PPG signal, $x(t)$, can be recovered from $X(f)$ using the following sum of cosine and sine waves:
+
+```math
+	x[i] = \sum_{k=0}^{N/2} Re \{\overline{X}[k]\} \cos\left(\frac{2\pi k i}{N}\right) \; + \; \sum_{k=0}^{N/2} Im\{\overline{X}[k]\} \sin\left(\frac{2\pi k i}{N}\right) \quad ,
+```
+
+where $i$ is the sample number (varying from 0 to $N-1$), $N$ is the length of the FFT, and
+
+```math
+	Re\{\overline{X}[k]\} =  \frac{Re\{X[k]\}}{N/2} \quad \mathrm{and} \quad Im\{\overline{X}[k]\} = -\frac{Im\{X[k]\}}{N/2} \quad ,
+```
+
+with the exceptions that
+
+```math
+Re\{\overline{X}[0]\} =  \frac{Re\{X[0]\}}{N} \quad \mathrm{and} \quad Re\{\overline{X}[N/2]\} = -\frac{Im\{X[N/2]\}}{N} \quad .
+```
+
+A similar approach can be used to estimate an ABP signal, $y(t)$, from the PPG, $x(t)$. Firstly, $X(f)$ is calculated from $x(t)$ using the FFT. Secondly, $y(t)$ is calculated using a sum of cosine and sine waves, where the amplitude and phase offset of each wave are adjusted according to the transfer function. For instance, 
+
+```math
+y[i] = \sum_{k=0}^{N/2} A[k] Re\{\overline{X}[k]\} \cos\left(\frac{2\pi k i}{N} + \phi[k] \right) \; + \; \sum_{k=0}^{N/2} A[k] Im\{\overline{X}[k]\} \sin\left(\frac{2\pi k i}{N} + \phi[k] \right) \; ,
+```
+where the amplitude and phase of the transfer function are denoted by $A(f)$ and $\phi(f)$ respectively, and $\phi$ is expressed in radians.
+
+The reported transfer functions can also be used to estimate a PPG signal from the ABP. This can be achieved by using the reciprocal of the amplitude, and the negative of the phase, of the reported transfer function.
+
+
 ## References
 
 <a id="1">[1]</a> 
