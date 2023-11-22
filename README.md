@@ -69,7 +69,7 @@ A plot of the input signal and estimated signals, such as that shown in the figu
 ```
 _i.e._ `options` is a structure containing a field named `do_plot`, which is a true logical.
 
-![](https://github.com/peterhcharlton/transfer_functions/assets/9865941/4a07f46c-4bd1-4c1e-8608-2a6697dca096)
+![sample_ppg_bp_tf](https://github.com/peterhcharlton/transfer_functions/assets/9865941/9a19b8a1-8ebb-4699-9aef-16331c17ea83)
 
 ### The Methodology of `PPG_ABP_TF`
 
