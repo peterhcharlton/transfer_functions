@@ -50,6 +50,19 @@ where the amplitude and phase of the transfer function are denoted by $A(f)$ and
 
 The reported transfer functions can also be used to estimate a PPG signal from the ABP. This can be achieved by using the reciprocal of the amplitude, and the negative of the phase, of the reported transfer function.
 
+## `PPG_ABP_TF`
+
+### Using `PPG_ABP_TF`
+
+`PPG_ABP_TF` can be used to estimate ABP signals from the PPG, and vice-versa. The input signal can be either a signal containing several pulses, or a single pulse wave. The input data, $S$, should be prepared as a structure with two fields: $S.v$, a vector of signal amplitudes, and $S.fs$, the sampling frequency of the signal. The type of input signal (digPPG, digBP, or radBP) should also be specified as a string. At its simplest, `PPG_ABP_TF` can be called using
+
+```
+	transformed_sig = PPG_ABP_TF(S, 'digPPG');
+```
+
+where `transformed_sig` is a structure containing individual fields for each of the estimated signals. If the digital PPG is provided as an input, then digital and radial ABP signals will be estimated. Otherwise, if the digital or radial ABP are provided, then the digital PPG will be estimated. Each signal's field is itself a structure, containing the calculated signal amplitudes (_e.g._ `transformed_sig.v`), and the sampling frequency (_e.g._ `transformed_sig.digABP.fs`). Note that the pre-processed version of the input signal is also provided as one of the output signals.
+
+### The Methodology of `PPG_ABP_TF`
 
 ## References
 
