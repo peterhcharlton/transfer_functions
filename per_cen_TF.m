@@ -2,7 +2,7 @@ function transformed_sig = per_cen_TF(S, sig_type, options)
 % PER_CEN_TF    Transforms peripheral ABP signals into central signals (and
 % vice-versa) using an empirical transfer function.
 %   
-%  Inputs:
+%  # Inputs:
 %
 %    S         -  a pulsatile signal, consisting of either a signal pulse, or a
 %                   signal containing several pulses. S should be a structure, containing
@@ -13,23 +13,44 @@ function transformed_sig = per_cen_TF(S, sig_type, options)
 %                    options.do_plot                    - a logical (true or false)
 %                    options.retain_onset_time          - a logical
 %
-%  Outputs:
+%  # Outputs:
 %
 %    transformed_sig  -  the transformed pulsatile signal.
 %
-%  Exemplary usage:
+%  # Exemplary usage:
 %
 %    transformed_sig = per_cen_TF(S, 'brachABP')             transforms the brachial arterial blood pressure (ABP) signal, S, into a central BP signal
 %    transformed_sig = per_cen_TF(S, 'radiaABP')             transforms the radial arterial blood pressure (ABP) signal, S, into a central BP signal
 %    transformed_sig = per_cen_TF(S, 'carotABP')             transforms the carotid arterial blood pressure (ABP) signal, S, into a central BP signal
+%    transformed_sig = per_cen_TF                            runs example
 %
-%  For further information please see the accompanying manual.
-%
-%  This script contains items either copied or modified from the RRest
-%  toolbox which is covered by the GNU public licence (<a href="http://github.com/peterhcharlton/RRest/">link</a>).
-%  It also contains items either copied or modified from PulseAnalyse.m .
-%
-% Peter H. Charlton, King's College London, November 2018
+%   # Author
+%   Peter H. Charlton
+%   
+%   # Documentation
+%   <https://github.com/peterhcharlton/transfer_functions/>
+%   
+%   # License - MIT
+%      Copyright (c) 2023 Peter H. Charlton
+%      Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+%      The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+%      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+% add signal vector and example options if required
+if nargin < 2
+    sig_type = 'brachABP';
+end
+if nargin < 3
+    options.do_plot = false;
+    options.retain_onset_time = false;
+end
+if nargin == 0
+    S.v = [71.3192829820745;71.8659405509528;74.2534441409816;79.1625107700863;86.3067832793381;95.2293502459513;104.652179719127;112.451218597538;117.723444305620;120.914367981151;122.654755393275;123.356366836000;123.238957803213;122.384280338716;120.817835080023;118.611623827181;115.923150517787;112.957920289471;109.910187998602;106.926207301524;104.093730392040;101.459258432680;99.0415418922058;96.8435808456187;94.8571250866637;93.0604240715774;91.4017265065773;89.7880300666053;88.0805812828248;86.1586271364101;84.0949194461569;82.2989684498210;81.2192853601828;81.0276244710996;81.7089854075620;83.0158619819154;84.4599919876046;85.6468655618829;86.4759801921877;87.0373381285752;87.4516923898707;87.7895447386185;88.0651455310773;88.2552441859827;88.3238398033121;88.2491818393021;88.0425205752095;87.7391068923064;87.3749416906154;86.9762756264029;86.5558590184267;86.1121918291860;85.6347737961742;85.1108546006333;84.5314340175578;83.8942619906961;83.2083387450540;82.4886646556408;81.7547402099687;81.0275659330508;80.3213921811460;79.6452191792600;79.0027970211450;78.3933756880507;77.8139551049752;77.2645352719184;76.7443661701299;76.2549478371106;75.7962802728605;75.3668634398787;74.9644472819138;74.5852817052134;74.2253916104000;73.8822269337221;73.5539126283035;73.2394736697686;72.9383100431169;72.6492217183478;72.3701836448350;72.0981957475766;71.8293579290702;71.5621701518148;71.3470336758419]; % data from 25-yr old baseline subject of PWDB
+    S.v = [67.6921173029326;69.5339784614018;77.4237658180260;90.3545041984259;102.521723490848;110.823346143355;116.671657463078;121.334939157061;124.674437756466;126.290393267294;126.458812589718;125.755710124096;124.403841439320;122.523959554213;120.440822587729;118.459688171309;116.706559455031;115.264688520198;114.240578029376;113.636478038817;113.293384573420;113.034293208076;112.796952386496;112.585862221182;112.330520949591;111.855424184112;110.935566299605;109.306940695905;106.617038560292;102.588352955093;98.0541547120768;96.3617775145871;98.0752354629761;99.9139465426934;99.5821033585541;98.6764958303062;98.1908988023208;97.9055567807105;97.2609557776258;96.2488455868113;95.2314852647435;94.2876267802217;93.3287679206906;92.3676590049079;91.3975498641197;90.3636891295417;89.3103279074514;88.3664694229296;87.5786148385053;86.8755123728839;86.1664097572589;85.4325565228683;84.7039534197310;83.9926007478545;83.2782480009761;82.5488948790884;81.8232918509530;81.1231894603335;80.4545878572337;79.8099868541490;79.1796362073231;78.5567857480019;77.9391854199340;77.3260852043689;76.7212351950590;76.1223853357528;75.5295356264503;74.9412610315258;74.3592115922301;73.7842873310639;73.2161882405269;72.6540892999937;72.0980655113393;71.5493919064395;71.0093435171700;70.4782203510311;69.9554973948976;69.4404996318938;68.9325520451444;68.4310546196491;67.9384074154093]; % data for 75-year old from PWDB
+    S.fs = 100; % Hz
+    sig_type = 'radiaABP';
+    options.do_plot = true;
+end
 
 % orientate signal vector as a column
 S.v = S.v(:);
@@ -46,13 +67,6 @@ sig_type = strrep(sig_type, 'carABP', 'carotABP');
 sig_type = strrep(sig_type, 'radABP', 'radiaABP');
 
 % setup univeral parameters (for use throughout the script)
-if nargin < 2
-    sig_type = 'brachABP';
-end
-if nargin < 3
-    options.do_plot = false;
-    options.retain_onset_time = false;
-end
 up = setup_up(S, sig_type, options);
 
 % pre-process input signal
@@ -492,7 +506,7 @@ for bode_plot_no = 1 : length(bode_plot_names)
     curr_rel_bode_data.amp.f = req_freqs;
     req_freqs_within_rel_range = req_freqs(req_freqs<=curr_bode_data.amp.f(end));
 %     curr_rel_bode_data.amp.v = zeros(size(req_freqs));
-    curr_rel_bode_data.amp.v = ones(size(req_freqs));  % added 27th Sept 2019
+    curr_rel_bode_data.amp.v = ones(size(req_freqs));
     curr_rel_bode_data.amp.v(1:length(req_freqs_within_rel_range)) = interp1(curr_bode_data.amp.f, curr_bode_data.amp.v, req_freqs_within_rel_range);
     
     % phase
@@ -578,7 +592,7 @@ if options.do_plot
     xlabel('Time [s]', 'FontSize', ftsize)
     ylab = ylabel({'Signal', '[au]'}, 'FontSize', ftsize, 'Rotation', 0);
     set(ylab, 'position', get(ylab,'position')-[0.06,0,0]);
-    ylim([0 1.1])
+    %ylim([0 1.1])
     box off
 end
 
