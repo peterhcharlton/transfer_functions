@@ -3,7 +3,7 @@ function transformed_sig = PPG_ABP_TF(S, sig_type, options)
 %               ABP signals (and vice-versa) using an empirical transfer
 %               function.
 %   
-%  Inputs:
+%  # Inputs:
 %
 %    S         -  a pulsatile signal, consisting of either a signal pulse, or a
 %                   signal containing several pulses. S should be a structure, containing
@@ -14,32 +14,44 @@ function transformed_sig = PPG_ABP_TF(S, sig_type, options)
 %                    options.do_plot                    - a logical (true or false)
 %                    options.retain_onset_time          - a logical
 %
-%  Outputs:
+%  # Outputs:
 %
 %    transformed_sig  -  the transformed pulsatile signal.
 %
-%  Exemplary usage:
+%  # Exemplary usage:
 %
 %    transformed_sig = PPG_ABP_TF(S, 'digPPG')             transforms the digital PPG signal, S, into digital and radial BP signals
 %    transformed_sig = PPG_ABP_TF(S, 'digABP')              transforms the digital ABP signal, S, into a digital PPG signal
-%    transformed_sig = PulseAnalyse(___, options)          uses options to specify the analysis.
+%    transformed_sig = PPG_ABP_TF(___, options)          uses options to specify the analysis.
+%    transformed_sig = PPG_ABP_TF                         runs example
 %
-%  For further information please see the accompanying manual.
-%
-%  This script contains items either copied or modified from the RRest
-%  toolbox which is covered by the GNU public licence (<a href="http://github.com/peterhcharlton/RRest/">link</a>).
-%  It also contains items either copied or modified from PulseAnalyse.m .
-%
-% Peter H. Charlton, King's College London, August 2017
+%   # Author
+%   Peter H. Charlton
+%   
+%   # Documentation
+%   <https://github.com/peterhcharlton/transfer_functions/>
+%   
+%   # License - MIT
+%      Copyright (c) 2023 Peter H. Charlton
+%      Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+%      The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+%      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+% add signal vector and example options if required
+if nargin == 0
+    S.v = [0;0.00628970766177428;0.0307627655548188;0.0791862386187928;0.151905651422339;0.243641013634745;0.346287418078344;0.452091105971867;0.555142098983168;0.651419326186456;0.738305833068251;0.814049405320355;0.877408148398220;0.927566419817020;0.964224145761484;0.987672657551016;0.998756176940559;0.998736946505976;0.989123719939554;0.971510971702026;0.947455377314878;0.918399141842007;0.885631502232484;0.850262585042461;0.813180290422411;0.774972291330415;0.735822503975833;0.695466812957196;0.653427226999469;0.609723940756849;0.565683921950046;0.523952533943634;0.487482865731580;0.458249017189714;0.436597177520869;0.421553367926175;0.411615055007677;0.405380371884164;0.401796146036889;0.400137858032498;0.399876919188101;0.400543228629418;0.401652659996597;0.402718462476834;0.403311180132780;0.403113322325034;0.401938552894112;0.399715721898012;0.396450231619757;0.392177154294230;0.386920928009294;0.380672537598646;0.373388969300940;0.365010883212453;0.355489982582136;0.344815871849598;0.333033251924511;0.320244476471943;0.306597980460717;0.292267574252144;0.277430459546087;0.262250937322390;0.246872585607726;0.231418736648864;0.215997078226287;0.200704186800192;0.185627231700719;0.170842066434898;0.156409888473802;0.142374631841498;0.128763035282657;0.115587692763061;0.102851757034630;0.0905530978595810;0.0786869264633734;0.0672456591994948;0.0562175541972771;0.0455843936631874;0.0353196092715777;0.0253904464862737;0.0158147993046652;0.00701603228194082;0.000783495567359780]; % data from 25-yr old baseline subject of PWDB
+    S.fs = 100; % Hz
+    sig_type = 'digPPG';
+    options.do_plot = true;
+elseif nargin < 3
+    options.do_plot = false;
+    options.retain_onset_time = false;
+end
 
 % orientate signal vector as a column
 S.v = S.v(:);
 
 % setup univeral parameters (for use throughout the script)
-if nargin < 3
-    options.do_plot = false;
-    options.retain_onset_time = false;
-end
 up = setup_up(S, sig_type, options);
 
 % pre-process input signal
@@ -526,7 +538,7 @@ if options.do_plot
     xlabel('Time [s]', 'FontSize', ftsize)
     ylab = ylabel({'Signal', '[au]'}, 'FontSize', ftsize, 'Rotation', 0);
     set(ylab, 'position', get(ylab,'position')-[0.06,0,0]);
-    ylim([0 1.1])
+    %ylim([0 1.1])
     box off
 end
 
