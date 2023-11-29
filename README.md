@@ -7,7 +7,7 @@ This repository contains Matlab scripts to:
 
 ## Summary 
 
-Arterial blood pressure (ABP) waveforms contain a wealth of information on the cardiovascular (CV) system, providing potential diagnostic utility [[1]](#1). Furthermore, ABP waveforms can be modelled using physical principles [[2]](#2), allowing one to predict the shape of the ABP pulse under specified CV conditions. However, methods for acquiring ABP signals in vivo either require a skilled operator (_e.g._ applanation tonometry), or are invasive (_e.g._ a pressure catheter). Conversely, the digital photoplethysmogram (PPG) can be easily and non-invasively acquired in a wide range of clinical settings, using a pulse oximetry probe. It is closely related to the BP waveform [[3]](#3), although the exact physiological mechanisms underlying it remain unclear [[4]](#4). A generalised transfer function relating the digital PPG to the ABP waveform has previously been reported [[5]](#5), which can be used to estimate ABP waveforms from the PPG. This transfer function could allow one to conduct ABP-based analyses on estimated ABP signals, derived from easily acquired PPG waveforms. This would expand the utility of ABP-based analyses to clinical settings where it is not practical to acquire ABP waveforms, and would also allow one to use physical modelling to predict the shape of PPG waveforms.
+Arterial blood pressure (ABP) waveforms contain a wealth of information on the cardiovascular (CV) system, providing potential diagnostic utility [[1]](#1). Furthermore, ABP waveforms can be modelled using physical principles [[2]](#2), allowing one to predict the shape of the ABP pulse under specified CV conditions. However, methods for acquiring ABP signals in vivo either require a skilled operator (_e.g._ applanation tonometry), or are invasive (_e.g._ a pressure catheter). Conversely, the digital photoplethysmogram (PPG) can be easily and non-invasively acquired in a wide range of clinical settings, using a pulse oximetry probe. It is closely related to the BP waveform [[3]](#3), although the exact physiological mechanisms underlying it remain unclear [[4]](#4). A generalised transfer function relating the digital PPG to the ABP waveform has previously been reported [[5]](#5), which can be used to estimate ABP waveforms from the PPG. This transfer function could allow one to conduct ABP-based analyses on estimated ABP signals, derived from easily acquired PPG waveforms. This would expand the utility of ABP-based analyses to clinical settings where it is not practical to acquire ABP waveforms, and would also allow one to use physical modelling to predict the shape of PPG waveforms [[7]](#7).
 
 This repository contains two Matlab scripts:
 1. `PPG_ABP_TF`, for estimating digital and radial ABP waveforms from the PPG (and vice-versa). It is based on the transfer function reported in [[5]](#5).
@@ -105,6 +105,10 @@ The transfer function tends to result in a spurious peak during late diastole, a
 
 The methodology and code used in `PPG_ABP_TF` could be adapted to create a script for estimating central BP from peripheral BP signals. For instance, transfer functions are reported in Figure 2 of [[6]](#6) for estimating ascending aortic BP from either the brachial or radial BP.
 
+## Further Reading
+
+For further reading on the development of the transfer function, and its application in PPG simulation and analysis, please see [[7]](#7).
+
 ## References
 
 <a id="1">[1]</a> 
@@ -124,3 +128,6 @@ S. C. Millasseau et al., 'Noninvasive assessment of the digital volume pulse. Co
 
 <a id="6">[6]</a>
 M. Karamanoglu et al., 'An analysis of the relationship between central aortic and peripheral upper limb pressure waves in man', _European Heart Journal_, vol. 14, no. 2, pp. 160-7, 1993.
+
+<a id="6">[6]</a>
+P. H. Charlton et al., 'Assessing mental stress from the photoplethysmogram: a numerical study', _Physiological Measurement_, vol. 39, no. 5, pp. 054001, 2018.
