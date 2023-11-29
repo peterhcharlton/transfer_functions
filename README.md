@@ -129,5 +129,5 @@ S. C. Millasseau et al., 'Noninvasive assessment of the digital volume pulse. Co
 <a id="6">[6]</a>
 M. Karamanoglu et al., 'An analysis of the relationship between central aortic and peripheral upper limb pressure waves in man', _European Heart Journal_, vol. 14, no. 2, pp. 160-7, 1993.
 
-<a id="6">[6]</a>
+<a id="7">[7]</a>
 P. H. Charlton et al., 'Assessing mental stress from the photoplethysmogram: a numerical study', _Physiological Measurement_, vol. 39, no. 5, pp. 054001, 2018.
